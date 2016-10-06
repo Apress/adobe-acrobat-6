@@ -1,0 +1,93 @@
+Project Scripts - Chapter 16.
+
+
+DATE
+
+var d = this.getField("date");
+d.value = util.printd("dd-mmm-yyyy", new Date());
+**************
+
+START
+
+this.pageNum++;
+**************
+
+SCRIPTS FOR OTHER BUTTON STATES (included for information, reference)
+
+// Create, name, and configure the appropriate buttons, and use these scripts//
+
+1.  Go to the previous page:
+
+this.pageNum--;
+
+2.  Go to the first page:
+
+this.pageNum = 0;
+
+3.  Go to the last page:
+
+this.pageNum = this.numPages - 1;
+
+
+EMAIL
+
+this.mailDoc(true, "dbaker@skyweb.ca", "", "", "Hi");
+**************
+
+
+ALTERNATE EMAIL SCRIPTS (included for information, reference)
+
+1.  mailing only form data:
+
+this.mailForm(true, "name@address", "", "", "Content of Subject Line");
+
+// the object this.mailForm defines only the FDF content of the form, which is attached to the email.//
+
+2.  alternate script for mailing form or form data:
+
+var url = "mailto:name@address";
+this.submitForm(url,false);
+
+//The variable url is declared, and the mailto object and address are bound to it.  The form contents will be sent to the address in the variable.  
+
+//In the second line, the variable is called (which will launch the email program and enter the address line).  The second argument, "false" will define the method used to send the information, and answers true or false to using the POST method.  
+A value of "false" means the data will be sent in url-encoded fashion.  A value of "true" will send the data as FDF only.//
+********
+
+PRINT PAGE
+
+app.alert("Thank you. Please give this form to your attendant on your next visit to Brad's U-Park.",3);
+********
+
+MANIPULATING FIELDS
+
+
+var h = this.getField("see.it");
+h.hidden = (event.value < 25);
+
+//use this script for displaying a field based on values entered in another field.  The hidden field must be set to a default value of hidden.//
+
+var r = this.getField("do.it");
+r.readonly = (event.value < 25);
+
+//use this script for converting a field from read-only to active based on values entered in another field.  The read-only field must be set to a default value of read-only.//
+********
+
+COUNT BOOKMARKS SCRIPT
+
+/* Count Bookmarks */
+/* Recursively work through bookmark tree */
+function CountBookmarks(bm, nLevel)
+{
+if (nLevel != 0) counter++ // don't count the root
+if (bm.children != null)
+for (var i = 0; i < bm.children.length; i++)
+CountBookmarks(bm.children[i], nLevel + 1);
+}
+var counter = 0;
+CountBookmarks(this.bookmarkRoot, 0);
+console.show();
+console.println("\nFile: " + this.path);
+console.println("The number of bookmarks: " + counter);
+
+
